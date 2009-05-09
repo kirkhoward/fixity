@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "fixity"
-    gem.summary = %Q{TODO}
+    gem.summary = %Q{"Fixed-width file processing with ruby."}
     gem.email = "bdimchef-git@wieldim.com"
     gem.homepage = "http://github.com/bdimcheff/fixity"
     gem.authors = ["Brandon Dimcheff"]
