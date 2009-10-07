@@ -6,15 +6,17 @@ module Fixity
       def field(field_name, options = {})
         @field_order ||= []
         @field_order << field_name.to_sym
+        @field_options ||= {}
+        @field_options[field_name] = options
         
         define_method(field_name) do
           @fields[field_name].value
         end
         
         define_method("#{field_name}=") do |val|
-          klass = options.delete(:class)
+          klass = options.dup.delete(:class)
           klass ||= Field
-          
+                    
           @fields[field_name] = klass.new(val, options)
         end
       end
@@ -22,6 +24,11 @@ module Fixity
     
     def initialize(field_hash = nil)
       @fields = {}
+      
+      self.class.field_order.each do |f|
+        send("#{f}=", nil)
+      end
+      
       update_attributes(field_hash)
     end
     
